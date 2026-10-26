@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Candela Solis Zampini — Portfolio</title>
+<meta name="description" content="Mechanical engineering (dynamics, robotics & controls) and astrobiology. Space resources, embedded systems, and web tools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fredoka:wght@500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+    --bg: #fbfaf8; --surface: #ffffff; --soft: #f1ecfb; --line: #e3dcf1;
+    --text: #2b2538; --muted: #6c657f;
+    --accent: #7c4dd6;      /* purple */
+    --accent-soft: #e9defc;
+    --sage: #a9c4af;        /* white sage */
+    --sage-deep: #4d7a5c;
+    --on-accent: #ffffff;
+    --radius: 20px;
+    --shadow: 0 10px 30px -12px rgba(124, 77, 214, .28);
+  }
+  :root[data-theme="dark"] {
+    --bg: #16121f; --surface: #1f1a2d; --soft: #2a2340; --line: #382f52;
+    --text: #f1edf8; --muted: #a79fbb;
+    --accent: #b99cff; --accent-soft: #3a2f5c;
+    --sage: #8fb399; --sage-deep: #b5d6bd; --on-accent: #1a1328;
+    --shadow: 0 10px 30px -12px rgba(0, 0, 0, .6);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #16121f; --surface: #1f1a2d; --soft: #2a2340; --line: #382f52;
+      --text: #f1edf8; --muted: #a79fbb;
+      --accent: #b99cff; --accent-soft: #3a2f5c;
+      --sage: #8fb399; --sage-deep: #b5d6bd; --on-accent: #1a1328;
+      --shadow: 0 10px 30px -12px rgba(0, 0, 0, .6);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--bg); color: var(--text);
+    background-image: radial-gradient(color-mix(in srgb, var(--accent) 16%, transparent) 1px, transparent 1.2px);
+    background-size: 22px 22px;
+    font: 16px/1.65 "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  h1, h3 { font-family: "Fredoka", "DM Sans", system-ui, sans-serif; font-weight: 600; }
+  .mono { font-family: "Space Mono", ui-monospace, "SF Mono", Menlo, monospace; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+
+  /* nav */
+  nav { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(12px);
+        background: color-mix(in srgb, var(--bg) 80%, transparent); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 58px; }
+  nav .brand { font-weight: 700; color: var(--accent); text-decoration: none; letter-spacing: .02em; }
+  nav ul { display: flex; gap: 22px; list-style: none; padding: 0; font-size: 14px; color: var(--muted); }
+  nav ul a { text-decoration: none; }
+  nav ul a:hover { color: var(--text); }
+  @media (max-width: 640px) { nav ul li:not(:last-child) { display: none; } }
+
+  /* hero */
+  .hero { padding: 96px 0 72px; position: relative; overflow: hidden; }
+  .hero::before, .hero::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; filter: blur(10px); }
+  .hero::before { right: -120px; top: -90px; width: 440px; height: 440px;
+    background: radial-gradient(circle at 35% 35%, color-mix(in srgb, var(--accent) 40%, transparent), transparent 64%); }
+  .hero::after { left: -140px; bottom: -120px; width: 380px; height: 380px;
+    background: radial-gradient(circle at 60% 40%, color-mix(in srgb, var(--sage) 55%, transparent), transparent 66%); }
+  .hero .wrap { position: relative; z-index: 1; }
+  .status { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px; padding: 7px 14px; border-radius: 999px;
+    background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); font-size: 12.5px; color: var(--muted); }
+  .status i { width: 8px; height: 8px; border-radius: 50%; background: var(--sage); box-shadow: 0 0 0 4px color-mix(in srgb, var(--sage) 30%, transparent); }
+  .cursor { display: inline-block; width: 8px; height: 1em; background: var(--accent); vertical-align: -2px; animation: blink 1.1s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .eyebrow { color: var(--sage-deep); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+  h1 { font-size: clamp(2.4rem, 7vw, 4.6rem); line-height: 1.05; margin: 14px 0 22px; letter-spacing: -.02em; }
+  h1 span { background: linear-gradient(100deg, var(--accent), #c08ae8 60%, var(--sage-deep)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lede { max-width: 620px; color: var(--muted); font-size: 1.12rem; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .btn { display: inline-block; padding: 12px 22px; background: var(--surface); border-radius: 999px; text-decoration: none; font-size: 14px;
+         border: 1px solid var(--line); transition: transform .15s, border-color .15s; }
+  .btn:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); box-shadow: var(--shadow); }
+
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 400; margin-bottom: 30px; }
+  h2 b { color: var(--accent); font-weight: 400; margin-right: 10px; }
+
+  /* about */
+  .about { display: grid; grid-template-columns: 1.4fr 1fr; gap: 44px; }
+  @media (max-width: 760px) { .about { grid-template-columns: 1fr; } }
+  .about p + p { margin-top: 14px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font-size: 12.5px; padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--text); background: var(--soft); }
+  .chip:nth-child(3n) { background: color-mix(in srgb, var(--sage) 28%, var(--surface)); }
+  .skillgroup + .skillgroup { margin-top: 18px; }
+  .skillgroup h3 { font-size: 12px; font-weight: 400; color: var(--sage-deep); margin-bottom: 8px; letter-spacing: .08em; text-transform: uppercase; }
+
+  /* project grid */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+  .filters button { background: var(--surface); font: inherit; font-size: 13px; padding: 6px 14px; border-radius: 999px; cursor: pointer;
+                    color: var(--muted); border: 1px solid var(--line); }
+  .filters button[aria-pressed="true"] { color: var(--on-accent); border-color: var(--accent); background: var(--accent); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px;
+          display: flex; flex-direction: column; gap: 10px; transition: transform .2s, border-color .2s; }
+  .card { box-shadow: 0 2px 0 var(--line); }
+  .card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow); }
+  .card.feature { background: linear-gradient(135deg, var(--surface) 55%, var(--soft)); }
+  .card.feature { grid-column: 1 / -1; padding: 30px; }
+  .card.feature h3 { font-size: 1.5rem; }
+  .card h3 { font-size: 1.12rem; line-height: 1.3; }
+  .card p { color: var(--muted); font-size: 14.5px; flex: 1; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 11.5px; color: var(--sage-deep); background: color-mix(in srgb, var(--sage) 22%, transparent); padding: 2px 9px; border-radius: 999px; }
+  .tag::before { content: "✦ "; font-size: 9px; opacity: .7; }
+  .links { display: flex; gap: 16px; font-size: 13.5px; margin-top: 4px; }
+  .links a { color: var(--text); text-decoration: none; border-bottom: 2px solid var(--accent-soft); padding-bottom: 1px; }
+  .links a:hover { color: var(--accent); }
+  .hidden { display: none !important; }
+  .private { font-size: 12.5px; color: var(--muted); }
+  .private::before { content: "🔒 "; }
+
+  footer { padding: 56px 0 72px; border-top: 1px solid var(--line); text-align: center; color: var(--muted); font-size: 14px; }
+  footer .big { font-size: clamp(1.6rem, 4vw, 2.4rem); color: var(--text); margin-bottom: 18px; }
+  .fade { opacity: 0; transform: translateY(14px); transition: opacity .6s, transform .6s; }
+  .fade.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .fade { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand mono" href="#top">CSZ/</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="https://github.com/canduki21">GitHub ↗</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="status mono"><i></i>&gt; building things that work on and off-world<span class="cursor"></span></p>
+    <p class="eyebrow mono">✦ Mechanical Engineering · Astrobiology ✦</p>
+    <h1>Candela<br>Solis <span>Zampini</span></h1>
+    <p class="lede">I build things that bridge hardware, software and control: robots for the Moon, sensors that watch duckweed grow, and the web tools that keep a space-resources startup running.</p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">See my work</a>
+      <a class="btn" href="https://github.com/canduki21">github.com/canduki21</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap about fade">
+    <div>
+      <h2><b>01</b>About</h2>
+      <p>I hold a <strong>Master's in Mechanical Engineering</strong> from Florida Tech (Dynamics, Robotics and Controls) and a degree in <strong>Astrobiology</strong>. The two meet in my work: engineering systems that can operate, and help life operate, beyond Earth.</p>
+      <p>My projects range from lunar regolith research and plant-growth instrumentation to embedded devices, mobile apps, automation, and the websites and dashboards that run Space Resource Technologies.</p>
+    </div>
+    <div>
+      <div class="skillgroup"><h3 class="mono">Engineering</h3>
+        <div class="chips"><span class="chip">Mechatronics</span><span class="chip">Robotics</span><span class="chip">Control systems</span><span class="chip">Arduino / embedded</span><span class="chip">Sensors &amp; DAQ</span><span class="chip">Space resources</span></div></div>
+      <div class="skillgroup"><h3 class="mono">Software</h3>
+        <div class="chips"><span class="chip">Python</span><span class="chip">C / C++</span><span class="chip">JavaScript / TypeScript</span><span class="chip">React + Vite</span><span class="chip">Shopify Liquid</span><span class="chip">Kotlin</span><span class="chip">Next.js</span><span class="chip">MATLAB</span><span class="chip">Jupyter</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2><b>02</b>Projects</h2>
+    <div class="filters" role="group" aria-label="Filter projects">
+      <button aria-pressed="true" data-f="all">All</button>
+      <button aria-pressed="false" data-f="space">Space &amp; Research</button>
+      <button aria-pressed="false" data-f="hardware">Hardware &amp; Controls</button>
+      <button aria-pressed="false" data-f="web">Web &amp; Software</button>
+    </div>
+
+    <div class="grid">
+
+      <article class="card feature fade" data-c="space">
+        <div class="meta"><span class="tag">research</span><span class="tag">robotics</span><span class="tag">lunar regolith</span></div>
+        <h3>MATEAR — Moon Adaptive Technology for Extraterrestrial Architectural Robotics</h3>
+        <p>A research project developing robotic systems and construction methods for the Moon. It studies how autonomous and semi-autonomous machines can use in-situ resources like lunar regolith to build landing pads, habitats and surface stabilization. The repository holds the experimental procedures, datasets, results and analysis.</p>
+        <div class="links"><a href="https://github.com/canduki21/MATEAR">Repository ↗</a><a href="https://github.com/canduki21/regolith">Regolith code ↗</a></div>
+      </article>
+
+      <article class="card feature fade" data-c="space hardware">
+        <div class="meta"><span class="tag">python</span><span class="tag">sensors</span><span class="tag">HMI</span><span class="tag">computer vision</span></div>
+        <h3>Duckweed Labs — plant-growth instrumentation</h3>
+        <p>A sensor and human-machine-interface system for monitoring duckweed cultures. Work includes validating the full sensor suite, building remote access to live data over a private network, and a notebook that estimates duckweed surface area from images. A related 2D clinostat (Arduino) explores plant growth under altered gravity.</p>
+        <div class="links"><a href="https://github.com/canduki21/UIH-Duckweed">UIH-Duckweed ↗</a><a href="https://github.com/canduki21/DUCKWEED">DUCKWEED ↗</a><a href="https://github.com/canduki21/area-duckweed">Area calculator ↗</a><a href="https://github.com/canduki21/clinostat">Clinostat ↗</a></div>
+      </article>
+
+      <article class="card feature fade" data-c="hardware">
+        <div class="meta"><span class="tag">STM32</span><span class="tag">firmware</span><span class="tag">bluetooth</span><span class="tag">power electronics</span><span class="tag">react native</span></div>
+        <h3>Matedry — wireless weather station with fan control</h3>
+        <p>A battery-powered device built around an STM32 "Blue Pill" that reads temperature and humidity (DHT11) and drives a 24V fan through a MOSFET. A Bluetooth module (HC-05 or BLE HM-10) connects it to a companion mobile app. I designed the full power chain: USB-C charging (TP5100), a protected 2S Li-ion pack (BMS), a 5V buck for the logic and a 24V boost for the fan. The repo has firmware for the fan controller and weather station, wiring and component docs, a flashing guide, and a no-battery variant.</p>
+        <div class="links"><span class="private">Private repository</span></div>
+      </article>
+
+      <article class="card fade" data-c="web space">
+        <div class="meta"><span class="tag">react</span><span class="tag">typescript</span><span class="tag">vite</span></div>
+        <h3>SRT Database</h3>
+        <p>A React + TypeScript data app for Space Resource Technologies, covering papers, paper submissions and report purchases.</p>
+        <div class="links"><a href="https://srt-database.vercel.app">Live ↗</a><a href="https://github.com/canduki21/SRT-DATABASE">Code ↗</a></div>
+      </article>
+
+      <article class="card fade" data-c="web space">
+        <div class="meta"><span class="tag">html/css</span><span class="tag">design system</span></div>
+        <h3>SRT Website — landing page</h3>
+        <p>A landing page with a deliberate palette: near-black "void" with iron-oxide orange drawn from Mars-simulant mineralogy. It pairs Space Mono for data readouts with DM Sans for body text.</p>
+        <div class="links"><a href="https://github.com/canduki21/srt-website">Code ↗</a></div>
+      </article>
+
+      <article class="card fade" data-c="web">
+        <div class="meta"><span class="tag">react</span><span class="tag">typescript</span><span class="tag">dashboard</span></div>
+        <h3>Inventory Dashboard</h3>
+        <p>A TypeScript + React dashboard for tracking inventory, deployed on Vercel. Companion tools: <em>srt-inventory</em> and <em>shopify-dashboard</em>.</p>
+        <div class="links"><a href="https://inventory-dashboard-lac.vercel.app">Live ↗</a><a href="https://github.com/canduki21/inventory-dashboard">Code ↗</a><a href="https://github.com/canduki21/shopify-dashboard">Shopify ↗</a></div>
+      </article>
+
+      <article class="card fade" data-c="web">
+        <div class="meta"><span class="tag">javascript</span><span class="tag">analytics</span></div>
+        <h3>Amazon FBA Dashboard</h3>
+        <p>A JavaScript dashboard for monitoring Amazon FBA business data. It is my most recent project.</p>
+        <div class="links"><a href="https://github.com/canduki21/amazon-fba-dashboard">Code ↗</a></div>
+      </article>
+
+      <article class="card fade" data-c="web">
+        <div class="meta"><span class="tag">html</span><span class="tag">community</span></div>
+        <h3>SRT Community Hub</h3>
+        <p>A community space for research posts, notes and discussions around space resource technology.</p>
+        <div class="links"><a href="https://github.com/canduki21/SRT-HUB">Code ↗</a></div>
+      </article>
+
+      <article class="card fade" data-c="web">
+        <div class="meta"><span class="tag">html</span><span class="tag">spanish</span><span class="tag">client site</span></div>
+        <h3>Plásticos Exclusivos S.A.</h3>
+        <p>A company website built for Plásticos Exclusivos S.A. Also see my web showcase collection and the Hangr support site.</p>
+        <div class="links"><a href="https://github.com/canduki21/plasticosexclusivos-web">Code ↗</a><a href="https://github.com/canduki21/Paginas-web-showcase">Showcase ↗</a><a href="https://github.com/canduki21/Hangr-Support">Hangr ↗</a></div>
+      </article>
+
+      <article class="card fade" data-c="hardware">
+        <div class="meta"><span class="tag">C</span><span class="tag">embedded</span><span class="tag">control</span></div>
+        <h3>Mechatronics Coursework</h3>
+        <p>A collection of hardware–software integration projects combining embedded systems, control logic, sensor integration and electromechanical actuation.</p>
+        <div class="links"><a href="https://github.com/canduki21/Mechatronics">Code ↗</a></div>
+      </article>
+
+      <article class="card fade" data-c="hardware">
+        <div class="meta"><span class="tag">python</span><span class="tag">DAQ</span><span class="tag">MEE5318</span></div>
+        <h3>Instrumentation &amp; Measurement Systems</h3>
+        <p>Coursework on sensors, signal conditioning, virtual instruments, communication standards, data acquisition and process control.</p>
+        <div class="links"><a href="https://github.com/canduki21/Instrumentation-and-Measurement-Systems">Code ↗</a><a href="https://github.com/canduki21/instru">instru ↗</a></div>
+      </article>
+
+      <article class="card fade" data-c="hardware">
+        <div class="meta"><span class="tag">C++</span><span class="tag">arduino</span><span class="tag">competition</span></div>
+        <h3>Hey Pumpkin &amp; Panther Paws</h3>
+        <p>Two C++ builds: an entry in a high-tech pumpkin competition, and Panther Paws.</p>
+        <div class="links"><a href="https://github.com/canduki21/heypumpkin">Hey Pumpkin ↗</a><a href="https://github.com/canduki21/pantherpaws">Panther Paws ↗</a></div>
+      </article>
+
+      <article class="card fade" data-c="space">
+        <div class="meta"><span class="tag">python</span><span class="tag">jupyter</span><span class="tag">ML</span></div>
+        <h3>Explainable AI &amp; Astrophysics</h3>
+        <p>Course work from an Explainable AI class (Jupyter) and a library of calculators for an Astrophysics class.</p>
+        <div class="links"><a href="https://github.com/canduki21/XAI">XAI ↗</a><a href="https://github.com/canduki21/Astrophysics">Astrophysics ↗</a></div>
+      </article>
+      <article class="card fade" data-c="web">
+        <div class="meta"><span class="tag">kotlin</span><span class="tag">android</span></div>
+        <h3>Rinde+</h3>
+        <p>An Android overlay app for Argentine delivery drivers. It calculates real net profit per trip after fuel costs and supports Glovo, Rappi, PedidosYa and DiDi.</p>
+        <div class="links"><span class="private">Private repository</span></div>
+      </article>
+
+      <article class="card fade" data-c="web">
+        <div class="meta"><span class="tag">expo</span><span class="tag">react native</span><span class="tag">typescript</span></div>
+        <h3>Hangr</h3>
+        <p>A mobile app built with Expo and React Native, with an admin web panel. Its support site is public.</p>
+        <div class="links"><a href="https://github.com/canduki21/Hangr-Support">Support site ↗</a><span class="private">App is private</span></div>
+      </article>
+
+      <article class="card fade" data-c="web space">
+        <div class="meta"><span class="tag">automation</span><span class="tag">jira</span><span class="tag">apps script</span><span class="tag">slack</span></div>
+        <h3>SRT Operations Automation</h3>
+        <p>Production-run automation that flows Jira into Apps Script and Google Sheets, plus Slack bots for the SRT team.</p>
+        <div class="links"><span class="private">Private repositories</span></div>
+      </article>
+
+      <article class="card fade" data-c="hardware space">
+        <div class="meta"><span class="tag">matlab</span><span class="tag">video analysis</span></div>
+        <h3>Raddante Lab — Pac-Man Tracking</h3>
+        <p>MATLAB scripts that process recorded video to track the Pac-Man game: score, nearest ghosts and button-press inference.</p>
+        <div class="links"><span class="private">Private repository</span></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="big">Want to see more?</p>
+    <a class="btn primary" href="https://github.com/canduki21">Browse all repositories on GitHub</a>
+    <p style="margin-top:28px" class="mono">© <span id="yr"></span> Candela Solis Zampini</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // project filter
+  const btns = document.querySelectorAll('.filters button');
+  const cards = document.querySelectorAll('.card');
+  btns.forEach(b => b.addEventListener('click', () => {
+    btns.forEach(x => x.setAttribute('aria-pressed', x === b));
+    const f = b.dataset.f;
+    cards.forEach(c => c.classList.toggle('hidden', f !== 'all' && !c.dataset.c.split(' ').includes(f)));
+  }));
+
+  // fade-in on scroll
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: .1 });
+  document.querySelectorAll('.fade').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
